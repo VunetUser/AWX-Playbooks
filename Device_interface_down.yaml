@@ -6,7 +6,7 @@
   - device_name: default_name
 
   tasks:
-  - name: make interface up
+  - name: make interface down
     ios_interface:
       name: "{{ device_name }}"
       enabled: False
