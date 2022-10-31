@@ -1,9 +1,13 @@
 ---
 - hosts: all
+  become: yes
+  become_method: su
+  vars:
+  - path: "home/osboxes/Documents/"
   tasks:
   - name: Ansible delete file glob
     find:
-      paths: /home/osboxes/Logs
+      paths: "{{ path }}"
       patterns: "*.log"
     register: files_to_delete
   
@@ -17,4 +21,3 @@
       state: absent
     with_items: "{{ files_to_delete.files }}"
     
-
