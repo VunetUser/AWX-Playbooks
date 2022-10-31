@@ -1,0 +1,20 @@
+---
+- hosts: all
+  tasks:
+  - name: Ansible delete file glob
+    find:
+      paths: /home/osboxes/Logs
+      patterns: "*.log"
+    register: files_to_delete
+  
+  - name: Print log file names
+    debug:
+      msg: "{{ files_to_delete.files }}"
+      
+  - name: Ansible remove file glob
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    with_items: "{{ files_to_delete.files }}"
+    
+

@@ -1,0 +1,12 @@
+---
+- hosts: all
+  connection: ansible.netcommon.network_cli
+  gather_facts: false
+  vars:
+  - device_name: default_name
+
+  tasks: 
+  - name: make interface up
+    ios_interface:
+      name: "{{ device_name }}"
+      enabled: True
